@@ -1,3 +1,4 @@
+import { getDictionary } from '../localization/dictionaries'
 import Image from 'next/image'
 import Link from 'next/link'
 import clsx from 'clsx'
@@ -99,7 +100,7 @@ function Article({ article }) {
 
 function SocialLink({ icon: Icon, ...props }) {
   return (
-    <Link className="group -m-1 p-1" {...props}>
+    <Link target="_blank" className="group -m-1 p-1" {...props}>
       <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
     </Link>
   )
@@ -252,7 +253,7 @@ function Photos() {
   )
 }
 
-export default async function Home() {
+export default async function Home({ params: { lang } }) {
   let articles = (await getAllArticles()).slice(0, 4)
 
   return (
@@ -260,7 +261,7 @@ export default async function Home() {
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            Software designer, founder, and amateur astronaut.
+            {global.dict.intro}
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             I’m Spencer, a software designer and entrepreneur based in New York
@@ -269,6 +270,16 @@ export default async function Home() {
             own terms.
           </p>
           <div className="mt-6 flex gap-6">
+          <SocialLink
+              href="https://www.linkedin.com/in/jingyuan-gloria-zhang-374349161/"
+              aria-label="Follow on LinkedIn"
+              icon={LinkedInIcon}
+            />
+          <SocialLink
+              href="https://github.com/gloriazhang123"
+              aria-label="Follow on GitHub"
+              icon={GitHubIcon}
+            />
             <SocialLink
               href="https://twitter.com"
               aria-label="Follow on Twitter"
@@ -279,16 +290,8 @@ export default async function Home() {
               aria-label="Follow on Instagram"
               icon={InstagramIcon}
             />
-            <SocialLink
-              href="https://github.com"
-              aria-label="Follow on GitHub"
-              icon={GitHubIcon}
-            />
-            <SocialLink
-              href="https://linkedin.com"
-              aria-label="Follow on LinkedIn"
-              icon={LinkedInIcon}
-            />
+
+            
           </div>
         </div>
       </Container>
@@ -301,7 +304,7 @@ export default async function Home() {
             ))}
           </div>
           <div className="space-y-10 lg:pl-16 xl:pl-24">
-            <Newsletter />
+            {/* <Newsletter /> */}
             <Resume />
           </div>
         </div>

@@ -1,5 +1,6 @@
 'use client'
 
+
 import { Fragment, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -125,10 +126,14 @@ function MobileNavigation(props) {
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
                 <MobileNavItem href="/about">About</MobileNavItem>
-                <MobileNavItem href="/articles">Articles</MobileNavItem>
+                {/* <MobileNavItem href="/articles">Articles</MobileNavItem> */}
                 <MobileNavItem href="/projects">Projects</MobileNavItem>
-                <MobileNavItem href="/speaking">Speaking</MobileNavItem>
-                <MobileNavItem href="/uses">Uses</MobileNavItem>
+                {/* <MobileNavItem href="/speaking">Speaking</MobileNavItem>
+                <MobileNavItem href="/uses">Uses</MobileNavItem> */}
+                <MobileNavItem href="/en-US">en-US</MobileNavItem>
+                <MobileNavItem href="/zh-CN">zh-CN</MobileNavItem>
+                <MobileNavItem href="/ar-AE">ar-AE</MobileNavItem>
+
               </ul>
             </nav>
           </Popover.Panel>
@@ -166,10 +171,10 @@ function DesktopNavigation(props) {
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
         <NavItem href="/about">About</NavItem>
-        <NavItem href="/articles">Articles</NavItem>
+        {/* <NavItem href="/articles">Articles</NavItem> */}
         <NavItem href="/projects">Projects</NavItem>
-        <NavItem href="/speaking">Speaking</NavItem>
-        <NavItem href="/uses">Uses</NavItem>
+        {/* <NavItem href="/speaking">Speaking</NavItem>
+        <NavItem href="/uses">Uses</NavItem> */}
       </ul>
     </nav>
   )
@@ -236,6 +241,20 @@ function Avatar({ large = false, className, ...props }) {
     </Link>
   )
 }
+
+
+function LanguageSwitcher(props) {
+  console.log(global.dict, 'hello')
+      return (
+        <nav {...props}>
+        <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
+          <NavItem href="/en-US">en-US</NavItem>
+          <NavItem href="/zh-CN">zh-CN</NavItem>
+          <NavItem href="/ar-AE">ar-AE</NavItem>
+            </ul>
+        </nav>
+              )
+                }
 
 export function Header() {
   let isHomePage = usePathname() === '/'
@@ -415,7 +434,8 @@ export function Header() {
                 <DesktopNavigation className="pointer-events-auto hidden md:block" />
               </div>
               <div className="flex justify-end md:flex-1">
-                <div className="pointer-events-auto">
+                <div className="flex gap-4 pointer-events-auto">
+                 <LanguageSwitcher className="pointer-events-auto hidden md:block" />
                   <ThemeToggle />
                 </div>
               </div>

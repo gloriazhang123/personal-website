@@ -1,7 +1,9 @@
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
+import { getDictionary } from '../localization/dictionaries'
 
 import '@/styles/tailwind.css'
+import { async } from 'fast-glob'
 
 export const metadata = {
   title: {
@@ -18,12 +20,18 @@ export const metadata = {
   },
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children, params: { lang } }) {
+  const dict = await getDictionary(lang)
+  global.dict = dict;
+  const direction = lang === 'ar-AE' ? 'rtl' : 'ltr';
+
+
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+    <html lang={lang} className="h-full antialiased" suppressHydrationWarning>
       <body className="flex h-full bg-zinc-50 dark:bg-black">
         <Providers>
-          <div className="flex w-full">
+          <div className="flex w-full" dir={direction}>
+            
             <Layout>{children}</Layout>
           </div>
         </Providers>
